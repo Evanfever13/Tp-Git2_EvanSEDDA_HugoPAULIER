@@ -1,5 +1,6 @@
 package main
 
+<<<<<<< HEAD
 import (
 	"fmt"
 	"math/rand"
@@ -70,4 +71,10 @@ func clearScreen() {
 func main() {
 	game := initGame()
 	game.afficherTableau()
+=======
+import "fmt"
+
+func main() {
+	fmt.Println("Hello, World!")
+>>>>>>> e2eec86ae08a535ec64a8e8f04edf770b7f3048a
 }
