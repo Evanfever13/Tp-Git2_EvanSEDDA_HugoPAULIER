@@ -121,6 +121,17 @@ func (g *Game) reset() {
 	fmt.Scanln()
 	*g = initGame()
 }
+
+func (g *Game) switchPlayer() {
+	if g.currentPlayer == g.player1 {
+		fmt.Println("C'est au tour du Joueur 2")
+		g.currentPlayer = g.player2
+	} else {
+		fmt.Println("C'est au tour du Joueur 1")
+		g.currentPlayer = g.player1
+	}
+}
+
 func main() {
 	game := initGame()
 	game.afficherTableau()
