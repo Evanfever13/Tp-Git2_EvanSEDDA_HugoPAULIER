@@ -121,7 +121,6 @@ func (g *Game) reset() {
 	fmt.Scanln()
 	*g = initGame()
 }
-
 func main() {
 	game := initGame()
 	game.afficherTableau()
