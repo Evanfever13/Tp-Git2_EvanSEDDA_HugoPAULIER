@@ -1,6 +1,5 @@
 package main
 
-<<<<<<< HEAD
 import (
 	"fmt"
 	"math/rand"
@@ -68,13 +67,40 @@ func clearScreen() {
 	fmt.Print("\033[H\033[2J")
 }
 
+func (g *Game) AddJeton(colonne int) bool {
+	if colonne < 0 || colonne >= 7 {
+		return false
+	}
+
+	for i := 5; i >= 0; i-- {
+		if g.tableau[i][colonne] == " " {
+			g.tableau[i][colonne] = g.currentPlayer
+			g.turnCount++
+			return true
+		}
+	}
+	return false
+}
+
+func verifierVictoire(g Game) bool {
+	for i := 0; i < 6; i++ {
+		for j := 0; j < 4; j++ {
+			if g.tableau[i][j] == g.tableau[i][j+1] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] {
+				return true
+			}
+		}
+	}
+	for j := 0; j < 7; j++ {
+		for j := 0; j < 3; j++ {
+			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] {
+				return true
+			}
+}
+
+
+
+
 func main() {
 	game := initGame()
 	game.afficherTableau()
-=======
-import "fmt"
-
-func main() {
-	fmt.Println("Hello, World!")
->>>>>>> e2eec86ae08a535ec64a8e8f04edf770b7f3048a
 }
