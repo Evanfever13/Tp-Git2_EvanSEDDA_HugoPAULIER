@@ -98,14 +98,14 @@ func verifierVictoire(g Game) bool {
 		}
 	}
 	for j := 0; j < 7; j++ {
-		for j := 0; j < 3; j++ {
-			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] {
+		for i := 0; i < 3; i++ {
+			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i+2][j] && g.tableau[i][j] == g.tableau[i+3][j] {
 				return true
 			}
+		}
+	}
+	return false
 }
-
-
-
 
 func main() {
 	game := initGame()
