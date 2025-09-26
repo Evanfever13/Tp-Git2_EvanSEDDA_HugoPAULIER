@@ -92,14 +92,14 @@ func (g *Game) AddJeton(colonne int) bool {
 func verifierVictoire(g Game) bool {
 	for i := 0; i < 6; i++ {
 		for j := 0; j < 4; j++ {
-			if g.tableau[i][j] == g.tableau[i][j+1] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] {
+			if g.tableau[i][j] == g.tableau[i][j+1] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] && g.tableau[i][j] != " " {
 				return true
 			}
 		}
 	}
 	for j := 0; j < 7; j++ {
 		for i := 0; i < 3; i++ {
-			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i+2][j] && g.tableau[i][j] == g.tableau[i+3][j] {
+			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i+2][j] && g.tableau[i][j] == g.tableau[i+3][j] && g.tableau[i][j] != " " {
 				return true
 			}
 		}
@@ -135,4 +135,27 @@ func (g *Game) switchPlayer() {
 func main() {
 	game := initGame()
 	game.afficherTableau()
+	for {
+		var colonne int
+		fmt.Printf("Joueur %s, entrez le numéro de la colonne (0-6) pour placer votre jeton : ", game.currentPlayer)
+		_, err := fmt.Scan(&colonne)
+		if err != nil {
+			fmt.Println("Entrée invalide. Veuillez entrer un numéro de colonne entre 0 et 6.")
+			continue
+		}
+		if !game.AddJeton(colonne) {
+			fmt.Println("Colonne pleine ou invalide. Veuillez choisir une autre colonne.")
+			continue
+		}
+		clearScreen()
+		game.afficherTableau()
+		if verifierVictoire(game) {
+			fmt.Printf("Félicitations Joueur %s, vous avez gagné !\n", game.currentPlayer)
+			game.reset()
+			game.afficherTableau()
+			continue
+		}
+		verifierMatchNul(game)
+		game.switchPlayer()
+	}
 }
