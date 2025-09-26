@@ -107,6 +107,20 @@ func verifierVictoire(g Game) bool {
 	return false
 }
 
+func verifierMatchNul(g Game) {
+	if g.turnCount >= 42 {
+		g.reset()
+	}
+}
+
+func (g *Game) reset() {
+	clearScreen()
+	fmt.Println("========== REINITIALISATION DU JEU ===========")
+	fmt.Println("Le jeu a été réinitialisé.")
+	fmt.Println("Appuie sur Entrée pour continuer...")
+	fmt.Scanln()
+	*g = initGame()
+}
 func main() {
 	game := initGame()
 	game.afficherTableau()
