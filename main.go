@@ -74,6 +74,54 @@ func clearScreen() {
 	fmt.Print("\033[H\033[2J")
 }
 
+func (g *Game) AddJeton(colonne int) bool {
+	if colonne < 0 || colonne >= 7 {
+		return false
+	}
+
+	for i := 5; i >= 0; i-- {
+		if g.tableau[i][colonne] == " " {
+			g.tableau[i][colonne] = g.currentPlayer
+			g.turnCount++
+			return true
+		}
+	}
+	return false
+}
+
+func verifierVictoire(g Game) bool {
+	for i := 0; i < 6; i++ {
+		for j := 0; j < 4; j++ {
+			if g.tableau[i][j] == g.tableau[i][j+1] && g.tableau[i][j] == g.tableau[i][j+2] && g.tableau[i][j] == g.tableau[i][j+3] {
+				return true
+			}
+		}
+	}
+	for j := 0; j < 7; j++ {
+		for i := 0; i < 3; i++ {
+			if g.tableau[i][j] == g.tableau[i+1][j] && g.tableau[i][j] == g.tableau[i+2][j] && g.tableau[i][j] == g.tableau[i+3][j] {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+func verifierMatchNul(g Game) {
+	if g.turnCount >= 42 {
+		g.reset()
+	}
+}
+
+func (g *Game) reset() {
+	clearScreen()
+	fmt.Println("========== REINITIALISATION DU JEU ===========")
+	fmt.Println("Le jeu a été réinitialisé.")
+	fmt.Println("Appuie sur Entrée pour continuer...")
+	fmt.Scanln()
+	*g = initGame()
+}
+
 func main() {
 	game := initGame()
 	game.afficherTableau()
