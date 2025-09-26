@@ -1,6 +1,5 @@
 package main
 
-<<<<<<< HEAD
 import (
 	"fmt"
 	"math/rand"
@@ -61,7 +60,14 @@ func (g *Game) afficherTableau() {
 	fmt.Println("Joueur 1 :", g.player1)
 	fmt.Println("Joueur 2 :", g.player2)
 	fmt.Println("Joueur courant :", g.currentPlayer)
-	fmt.Println("====================================================")
+	fmt.Println(" 0 1 2 3 4 5 6")
+	for i := 0; i < 6; i++ {
+		for j := 0; j < 7; j++ {
+			fmt.Print("|", g.tableau[i][j])
+		}
+		fmt.Println("|")
+	}
+	fmt.Println("---------------")
 }
 
 func clearScreen() {
@@ -71,10 +77,4 @@ func clearScreen() {
 func main() {
 	game := initGame()
 	game.afficherTableau()
-=======
-import "fmt"
-
-func main() {
-	fmt.Println("Hello, World!")
->>>>>>> e2eec86ae08a535ec64a8e8f04edf770b7f3048a
 }
